@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "slRSWdx3/kRwG0cA9XKBwOAkEG9ugmqZ4FBLhUkTZRY=",
+  "Source": "GoogleCloudApp",
+  "BasePath": "_content/GoogleCloudApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
