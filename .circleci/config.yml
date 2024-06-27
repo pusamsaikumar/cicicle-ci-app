@@ -20,7 +20,7 @@ jobs:
           command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - run:
           name: Push Docker image to Docker Hub
-          command: docker tag googlecloudapp:latest $DOCKERHUB_USERNAME/circle-test-app:latest && docker push $DOCKERHUB_USERNAME/circle-test-app:latest
+          command: docker tag googlecloudapp:latest pusamsai/circle-test-app:latest && docker push pusamsai/circle-test-app:latest
 
          
 
