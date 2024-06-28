@@ -1,13 +1,9 @@
 version: 2.1
 
-executors:
-  windows-default:
-    machine:
-      image: windows-server-2019
-
 jobs:
   build_and_push:
-    executor: windows-default
+    machine:
+      image: windows/2019
     steps:
       - checkout
 
@@ -28,22 +24,19 @@ jobs:
       - run:
           name: Build Docker Image
           shell: powershell.exe
-          command: docker build -t pusamsai/circle-test-app:latest -f GoogleCloudApp/Dockerfile .
+          command: |
+            cd YourAspNetCoreAppFolder
+            docker build -t pusamsai/circleci-aspnetcore-app:latest -f Dockerfile .
 
       - run:
           name: Login to Docker Hub
           shell: powershell.exe
-          command: docker login -u pusamsaikumar302@gmail.com -p VK_SE5kK*Gjb2F&
-
-      - run:
-          name: Tag Docker Image
-          shell: powershell.exe
-          command: docker tag pusamsai/circle-test-app:latest pusamsai/circle-test-app:latest
+          command:  docker login -u pusamsaikumar302@gmail.com -p VK_SE5kK*Gjb2F&
 
       - run:
           name: Push Docker Image to Docker Hub
           shell: powershell.exe
-          command: docker push pusamsai/circle-test-app:latest
+          command: docker push pusamsai/circleci-aspnetcore-app:latest
 
 workflows:
   version: 2
