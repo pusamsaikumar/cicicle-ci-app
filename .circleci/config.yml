@@ -23,10 +23,10 @@ jobs:
           name: "Build Docker Image"
           shell: powershell.exe
           command: |
-            docker build -t pusamsai/circle-test-app:latest -f GoogleCloudApp/Dockerfile .
+            docker build -t pusamsai/circle-test-app:googlecloudapp -f GoogleCloudApp/Dockerfile .
       - run:
           name: "Push Docker Image"
           shell: powershell.exe
           command: |
-            docker push pusamsai/circle-test-app:latest
+            docker push pusamsai/circle-test-app:googlecloudapp
 
