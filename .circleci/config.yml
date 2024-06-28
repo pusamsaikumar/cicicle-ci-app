@@ -25,8 +25,8 @@ jobs:
           name: Build Docker Image
           shell: powershell.exe
           command: |
-            cd YourAspNetCoreAppFolder
-            docker build -t pusamsai/circleci-aspnetcore-app:latest -f Dockerfile .
+           
+            docker build -t pusamsai/circleci-aspnetcore-app:latest -f GoogleCloudApp/Dockerfile .
 
       - run:
           name: Login to Docker Hub
