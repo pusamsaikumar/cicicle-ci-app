@@ -1,18 +1,19 @@
 version: 2.1
 
 executors:
-  windows:
-    machine:
-      image: windows
+  windows-default:
+    docker:
+      - image: circleci/windows:2022-core
 
 jobs:
   build_and_push:
-    executor: windows-latest
+    executor: windows-default
     steps:
       - checkout
 
       - run:
           name: Install Docker
+          shell: powershell.exe
           command: |
             Install-PackageProvider -Name NuGet -Force
             Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
@@ -21,23 +22,28 @@ jobs:
 
       - run:
           name: Verify Docker Installation
+          shell: powershell.exe
           command: docker --version
 
       - run:
           name: Build Docker Image
+          shell: powershell.exe
           command: docker build -t pusamsai/circle-test-app:latest -f GoogleCloudApp/Dockerfile .
 
       - run:
           name: Login to Docker Hub
+          shell: powershell.exe
           command: |
             docker login -u pusamsaikumar302@gmail.com -p VK_SE5kK*Gjb2F&
 
       - run:
           name: Tag Docker Image
-          command: docker tag googlecloudapp pusamsai/circle-test-app:latest
+          shell: powershell.exe
+          command: docker tag pusamsai/circle-test-app:latest pusamsai/circle-test-app:latest
 
       - run:
           name: Push Docker Image to Docker Hub
+          shell: powershell.exe
           command: docker push pusamsai/circle-test-app:latest
 
 workflows:
