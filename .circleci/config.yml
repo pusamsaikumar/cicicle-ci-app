@@ -1,46 +1,19 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@5.0
+
 jobs:
-  build_and_push:
-    machine:
-      type: windows
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
       - checkout
-
+      - run: systeminfo
       - run:
-          name: Install Docker
+          name: "Check docker"
           shell: powershell.exe
           command: |
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-            Install-PackageProvider -Name NuGet -Force
-            Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
-            Install-Package -Name docker -ProviderName DockerMsftProvider -Force
-            Start-Service Docker
-
-      - run:
-          name: Verify Docker Installation
-          shell: powershell.exe
-          command: docker --version
-
-      - run:
-          name: Build Docker Image
-          shell: powershell.exe
-          command: |
-         
-            docker build -t pusamsai/circle-test-app:latest -f  GoogleCloudApp/Dockerfile .
-
-      - run:
-          name: Login to Docker Hub
-          shell: powershell.exe
-          command: echo VK_SE5kK*Gjb2F& | docker login -u pusamsaikumar302@gmail.com --password-stdin
-
-      - run:
-          name: Push Docker Image to Docker Hub
-          shell: powershell.exe
-          command: docker push pusamsai/circle-test-app:latest
-
-workflows:
-  version: 2
-  build_and_push:
-    jobs:
-      - build_and_push
+            docker info
+            docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
