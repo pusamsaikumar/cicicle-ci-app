@@ -1,9 +1,10 @@
 version: 2.1
 
-executors:
-  windows:
-    machine:
-      image: windows-server-2019
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7
+    resource_class: large
 
 jobs:
   build_and_push:
