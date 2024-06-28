@@ -3,8 +3,7 @@ version: 2.1
 executors:
   windows-default:
     docker:
-      - image: circleci/windows:2022-core
-
+      - image:googlecloudapp
 jobs:
   build_and_push:
     executor: windows-default
